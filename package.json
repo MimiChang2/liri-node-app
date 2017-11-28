@@ -1,15 +1,25 @@
-var Twitter = require('twitter');
-
-var client = new Twitter({
-    consumer_key: '',
-    consumer_secret: '',
-    access_token_key: '',
-    access_token_secret: ''
-});
-
-var params = { screen_name: 'nodejs' };
-client.get('statuses/user_timeline', params, function(error, tweets, response) {
-    if(!error) {
-        console.log(tweets);
-    }
-});
+{
+  "name": "liri-node-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "keys.js",
+  "dependencies": {
+    "node-spotify-api": "^1.0.7",
+    "request": "^2.83.0",
+    "twitter": "^1.7.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MimiChang2/liri-node-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MimiChang2/liri-node-app/issues"
+  },
+  "homepage": "https://github.com/MimiChang2/liri-node-app#readme"
+}
