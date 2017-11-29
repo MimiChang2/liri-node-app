@@ -2,6 +2,8 @@ var Keys = require("./keys.js");
 
 var request = require("request");
 
+var fs = require("fs");
+
 var command = process.argv[2];
 var inputName = process.argv[3];
 
@@ -32,7 +34,11 @@ function runTwitter() {
     var params = { screen_name: 'mimichang77', count: 20 };
     client.get('statuses/user_timeline', params, function(error, tweets, response) {
         if(!error) {
-            console.log(tweets);
+            for(var i = 0; i < tweets.length; i++) {
+                console.log(tweets[i].created_at);
+                console.log(tweets[i].text);
+            }
+
         }
         else {
             console.log(error);
@@ -45,12 +51,12 @@ function runSpotify() {
 
     var spotify = new Spotify(Keys.spotifyKeys);
 
-    spotify.search({ type: 'track', query: 'All the Small Things' }, function(err, data) {
+    spotify.search({ type: 'track', query: 'The Sign', count: 2 }, function(err, data) {
         if(err) {
             return console.log('Error occurred: ' + err);
         }
 
-        console.log(JSON.stringify(data));
+        console.log(JSON.stringify(data, null, 2));
     });
 }
 
@@ -84,3 +90,14 @@ function runOMDB() {
         //     return console.log(MrNobody);
     });
 };
+
+function runText() {
+    fs.readFile("random.txt", "utf8", function(error, data) {
+
+        if(error) {
+            return console.log(error);
+        }
+        console.log(data);
+
+    });
+}
