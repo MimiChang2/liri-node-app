@@ -1,8 +1,7 @@
-var returnTwitterKeys = require("./keys.js");
+var Keys = require("./keys.js");
 
 var request = require("request");
 
-//OMDB
 var command = process.argv[2];
 var inputName = process.argv[3];
 
@@ -22,7 +21,38 @@ switch(command) {
     case "do-what-it-says":
         runText();
         break;
-};
+}
+
+function runTwitter() {
+
+    var Twitter = require('twitter');
+
+    var client = new Twitter(Keys.twitterKeys);
+
+    var params = { screen_name: 'mimichang77', count: 20 };
+    client.get('statuses/user_timeline', params, function(error, tweets, response) {
+        if(!error) {
+            console.log(tweets);
+        }
+        else {
+            console.log(error);
+        }
+    });
+}
+
+function runSpotify() {
+    var Spotify = require('node-spotify-api');
+
+    var spotify = new Spotify(Keys.spotifyKeys);
+
+    spotify.search({ type: 'track', query: 'All the Small Things' }, function(err, data) {
+        if(err) {
+            return console.log('Error occurred: ' + err);
+        }
+
+        console.log(JSON.stringify(data));
+    });
+}
 
 function runOMDB() {
 
@@ -47,7 +77,10 @@ function runOMDB() {
             console.log("Actors: " + JSON.parse(body).Actors);
         }
         else {
-            return console.log(error);
+            console.log(error);
         }
+
+        // var MrNobody = "http://www.omdbapi.com/?t=Mr.Nobody&y=&plot=short&apikey=trilogy";
+        //     return console.log(MrNobody);
     });
 };
