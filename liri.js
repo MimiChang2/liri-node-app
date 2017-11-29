@@ -65,8 +65,9 @@ function runSpotify() {
             for(var j = 0; j < data.tracks.items[i].album.artists.length; j++)
                 console.log("Artist: " + JSON.stringify(data.tracks.items[i].album.artists[j].name, null, 2));
         }
-        console.log("Link Preview: " + JSON.stringify(data.tracks.href, null, 2));
-        console.log("Album: " + JSON.stringify(data.tracks.items[i], null, 2));
+        console.log("Song Name: " + JSON.stringify(data.tracks.items[0].name, null, 2));
+        console.log("Link Preview: " + JSON.stringify(data.tracks.items[0].preview_url, null, 2));
+        console.log("Album: " + JSON.stringify(data.tracks.items[0].album.name, null, 2));
     });
 }
 
