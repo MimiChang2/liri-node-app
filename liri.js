@@ -7,23 +7,27 @@ var fs = require("fs");
 var command = process.argv[2];
 var inputName = process.argv[3];
 
-switch(command) {
-    case "my-tweets":
-        runTwitter();
-        break;
+function whatToDo() {
+    switch(command) {
+        case "my-tweets":
+            runTwitter();
+            break;
 
-    case "spotify-this-song":
-        runSpotify();
-        break;
+        case "spotify-this-song":
+            runSpotify();
+            break;
 
-    case "movie-this":
-        runOMDB();
-        break;
+        case "movie-this":
+            runOMDB();
+            break;
 
-    case "do-what-it-says":
-        runText();
-        break;
+        case "do-what-it-says":
+            runText();
+            break;
+    }
 }
+
+whatToDo();
 
 function runTwitter() {
 
@@ -113,6 +117,12 @@ function runText() {
             return console.log(error);
         }
         console.log(data);
+        var dataArr = data.split(",");
+        command = dataArr[0];
+        inputName = dataArr[1];
+        whatToDo();
+        console.log(dataArr);
+
 
     });
 }
