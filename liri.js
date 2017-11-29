@@ -51,16 +51,30 @@ function runSpotify() {
 
     var spotify = new Spotify(Keys.spotifyKeys);
 
-    spotify.search({ type: 'track', query: 'The Sign', count: 2 }, function(err, data) {
+    if(inputName === undefined) {
+        inputName = "The Sign";
+    }
+
+    spotify.search({ type: 'track', query: inputName, limit: 1 }, function(err, data) {
+
         if(err) {
             return console.log('Error occurred: ' + err);
         }
 
-        console.log(JSON.stringify(data, null, 2));
+        for(var i = 0; i < data.tracks.items.length; i++) {
+            for(var j = 0; j < data.tracks.items[i].album.artists.length; j++)
+                console.log("Artist: " + JSON.stringify(data.tracks.items[i].album.artists[j].name, null, 2));
+        }
+        console.log("Link Preview: " + JSON.stringify(data.tracks.href, null, 2));
+        console.log("Album: " + JSON.stringify(data.tracks.items[i], null, 2));
     });
 }
 
 function runOMDB() {
+
+    if(inputName === undefined) {
+        inputName = "Mr.Nobody";
+    }
 
     var queryUrl = "http://www.omdbapi.com/?t=" + inputName + "&y=&plot=short&apikey=trilogy";
     console.log(queryUrl);
